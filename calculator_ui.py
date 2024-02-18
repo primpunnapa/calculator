@@ -1,29 +1,40 @@
+"""code for a calculator with class-based UI."""
+
 import tkinter as tk
-from tkinter import ttk
 from keypad import Keypad
 from calculator_model import CalculatorModel
-from math import *
 
 
-class Calculator_UI(tk.Tk):
-    def __init__(self, controller):
+class CalculatorUI(tk.Tk):
+    """
+    Methods:
+    __init__(self): Initializes the CalculatorUI
+    init_components(self): Initialize the components of the calculator UI.
+    handle_click(self, event): Handle button click events.
+    run(self): Show the UI and wait for user input
+    """
+    def __init__(self):
+        """
+        Initialize the calculator UI.
+        """
         super().__init__()
         self.title('Calculator')
         self.model = CalculatorModel()
         self.init_components()
 
     def init_components(self):
+        """
+        Initialize the components of the calculator UI.
+
+        """
         self.display = tk.Label(self, text="", justify='right', anchor='e')
         self.display.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
         self.display.configure(background='#FFA07A', font=('Charter', 40), fg='#33A1C9')
 
-        # self.function_combobox = ttk.Combobox(self, values=['exp', 'ln', 'log10', 'log2', 'sqrt'])
-        # self.function_combobox.pack(side=tk.TOP, padx=2, pady=2)
-        # self.function_combobox.configure(font=('Charter', 16))
-        # self.function_combobox.bind('<<ComboboxSelected>>', lambda event: self.handle_click(event))
-
-        keypad = Keypad(self,['7','8','9','4','5','6','1','2','3',' ','0','.'], columns=3)
-        operation = Keypad(self,['*', '/', '+', '-', '^', 'mod', '(', ')', '=', 'exp', 'ln', 'log10', 'log2', 'sqrt','DEL', 'CLR'], columns=2)
+        keypad = Keypad(self,
+                        ['7', '8', '9', '4', '5', '6', '1', '2', '3', ' ', '0', '.'], columns=3)
+        operation = Keypad(self,['*', '/', '+', '-', '^', 'mod', '(', ')', '=', 'exp', 'ln', 'log10', 'log2',
+                                 'sqrt', 'DEL', 'CLR'], columns=2)
 
         keypad.bind('<Button>', self.handle_click)
         keypad.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
@@ -39,10 +50,13 @@ class Calculator_UI(tk.Tk):
         self.history_listbox.configure(font=('Charter', 16), foreground='#33A1C9')
 
     def handle_click(self, event):
+        """
+        Handle button click events.
+        :param event: The click event.
+        """
         key = event.widget['text']
         if key == "=":
             result = self.model.evaluate_expression()
-            print(result + 'test')
 
             if result != "Error":
                 self.display.config(fg='#33A1C9')
@@ -55,7 +69,6 @@ class Calculator_UI(tk.Tk):
                 self.display.config(text=result)
             else:
                 self.display.config(fg='red')
-                print("invalid")
 
         elif key == '^':
             self.model.expression += '**'
@@ -76,12 +89,10 @@ class Calculator_UI(tk.Tk):
             self.display.config(text=self.model.expression)
 
         elif key in {'sqrt', 'exp', 'log2', 'log10', 'ln'}:
-            # Handle special functions
+            # Handle special operations
             if self.model.expression and self.model.expression[-1].isdigit():
-                # If the last character is a digit, append the special function with a left parenthesis
                 self.model.expression = key + '(' + self.model.expression + ')'
             else:
-                # If the last character is an operator, append the special function
                 self.model.expression = self.model.expression + key + '('
             self.display.config(text=self.model.expression)
 
@@ -89,8 +100,6 @@ class Calculator_UI(tk.Tk):
             self.model.expression += key
             self.display.config(text=self.model.expression)
 
-
     def run(self):
+        """Show the UI and wait for user input"""
         self.mainloop()
-
-

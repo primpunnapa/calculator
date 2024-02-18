@@ -1,4 +1,5 @@
 """Model for calculator"""
+from math import *
 
 
 class CalculatorModel:
