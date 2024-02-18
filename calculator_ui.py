@@ -1,5 +1,4 @@
 """code for a calculator with class-based UI."""
-
 import tkinter as tk
 from keypad import Keypad
 from calculator_model import CalculatorModel
@@ -25,7 +24,6 @@ class CalculatorUI(tk.Tk):
     def init_components(self):
         """
         Initialize the components of the calculator UI.
-
         """
         self.display = tk.Label(self, text="", justify='right', anchor='e')
         self.display.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
@@ -33,7 +31,7 @@ class CalculatorUI(tk.Tk):
 
         keypad = Keypad(self,
                         ['7', '8', '9', '4', '5', '6', '1', '2', '3', ' ', '0', '.'], columns=3)
-        operation = Keypad(self,['*', '/', '+', '-', '^', 'mod', '(', ')', '=', 'exp', 'ln', 'log10', 'log2',
+        operation = Keypad(self,['*', '/', '+', '-', '^', 'mod', '(', ')', '=', 'exp', 'log', 'log10', 'log2',
                                  'sqrt', 'DEL', 'CLR'], columns=2)
 
         keypad.bind('<Button>', self.handle_click)
@@ -88,7 +86,7 @@ class CalculatorUI(tk.Tk):
             self.model.handle_del()
             self.display.config(text=self.model.expression)
 
-        elif key in {'sqrt', 'exp', 'log2', 'log10', 'ln'}:
+        elif key in {'sqrt', 'exp', 'log2', 'log10', 'log'}:
             # Handle special operations
             if self.model.expression and self.model.expression[-1].isdigit():
                 self.model.expression = key + '(' + self.model.expression + ')'
