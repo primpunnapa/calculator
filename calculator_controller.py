@@ -1,4 +1,6 @@
 """For controller of calculator"""
+from calculator_model import CalculatorModel
+from calculator_ui import CalculatorUI
 
 
 class CalculatorController:
@@ -8,12 +10,12 @@ class CalculatorController:
         handle_click(self, key): Handles button clicks, updating the model and UI accordingly.
     """
 
-    def __init__(self, model, ui):
+    def __init__(self, model: CalculatorModel, ui: CalculatorUI):
         """
         Initializes the CalculatorController.
 
         :param model: CalculatorModel
-        :param ui: Calculator_UI
+        :param ui: CalculatorUI
         """
         self.model = model
         self.ui = ui
