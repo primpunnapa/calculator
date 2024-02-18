@@ -1,6 +1,16 @@
+""" keypad for calculator"""
 import tkinter as tk
 
+
 class Keypad(tk.Frame):
+    """
+    Methods:
+    __init__(self): Initializes the Keypad
+    init_components(self): Initialize the components of the Keypad.
+    handle_click(self, event): Handle button click events.
+    bind(self): Bind an event handler to an event sequence.
+    configure(self): Apply configuration settings to all buttons.
+    """
 
     def __init__(self, parent, keynames=[], columns=1, controller=None, **kwargs):
         super().__init__(parent,**kwargs)
@@ -29,6 +39,9 @@ class Keypad(tk.Frame):
             self.columnconfigure(fc, weight=1)
 
     def handle_click(self, key):
+        """
+        Handle button click events.
+        """
         self.controller.handle_click(key)
 
     def bind(self, sequence, func):
