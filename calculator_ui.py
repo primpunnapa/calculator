@@ -4,6 +4,7 @@ from keypad import Keypad
 from calculator_model import CalculatorModel
 import pygame
 
+
 class CalculatorUI(tk.Tk):
     """
     Methods:
@@ -43,7 +44,6 @@ class CalculatorUI(tk.Tk):
         operation.pack(side=tk.RIGHT, expand=True, fill=tk.BOTH)
         operation.configure(foreground='#33A1C9')
 
-        # Create a Listbox for history
         self.history_listbox = tk.Listbox(self, height=5, width=15)
         self.history_listbox.pack(side=tk.RIGHT, expand=True, fill=tk.BOTH)
         self.history_listbox.configure(font=('Charter', 16), foreground='#33A1C9')
@@ -93,7 +93,6 @@ class CalculatorUI(tk.Tk):
             self.display.config(text=self.model.expression)
 
         elif key in {'sqrt', 'exp', 'log2', 'log10', 'log'}:
-            # Handle special operations
             if self.model.expression and self.model.expression[-1].isdigit():
                 self.model.expression = key + '(' + self.model.expression + ')'
             else:
