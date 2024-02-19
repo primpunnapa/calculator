@@ -49,6 +49,7 @@ class CalculatorUI(tk.Tk):
         self.history_listbox.configure(font=('Charter', 16), foreground='#33A1C9')
 
     def play(self):
+        """play error sound"""
         pygame.mixer.music.load("error-126627.mp3")
         pygame.mixer.music.play(loops=0)
 

@@ -6,7 +6,7 @@ class Keypad(tk.Frame):
     """
     Methods:
     __init__(self): Initializes the Keypad
-    init_components(self): Initialize the components of the Keypad.
+    init_components(self, columns): Initialize the components of the Keypad.
     handle_click(self, event): Handle button click events.
     bind(self): Bind an event handler to an event sequence.
     configure(self): Apply configuration settings to all buttons.
