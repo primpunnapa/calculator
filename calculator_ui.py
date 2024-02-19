@@ -2,7 +2,7 @@
 import tkinter as tk
 from keypad import Keypad
 from calculator_model import CalculatorModel
-
+import pygame
 
 class CalculatorUI(tk.Tk):
     """
@@ -20,6 +20,7 @@ class CalculatorUI(tk.Tk):
         self.title('Calculator')
         self.model = CalculatorModel()
         self.init_components()
+        pygame.mixer.init()
 
     def init_components(self):
         """
@@ -47,6 +48,10 @@ class CalculatorUI(tk.Tk):
         self.history_listbox.pack(side=tk.RIGHT, expand=True, fill=tk.BOTH)
         self.history_listbox.configure(font=('Charter', 16), foreground='#33A1C9')
 
+    def play(self):
+        pygame.mixer.music.load("error-126627.mp3")
+        pygame.mixer.music.play(loops=0)
+
     def handle_click(self, event):
         """
         Handle button click events.
@@ -67,6 +72,7 @@ class CalculatorUI(tk.Tk):
                 self.display.config(text=result)
             else:
                 self.display.config(fg='red')
+                self.play()
 
         elif key == '^':
             self.model.expression += '**'

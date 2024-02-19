@@ -48,6 +48,8 @@ class CalculatorModel:
         """
         if self.expression.endswith('sqrt('):
             self.expression = self.expression[:-5]
+        elif self.expression.endswith('log('):
+            self.expression = self.expression[:-4]
         elif self.expression.endswith('log2('):
             self.expression = self.expression[:-5]
         elif self.expression.endswith('log10('):
